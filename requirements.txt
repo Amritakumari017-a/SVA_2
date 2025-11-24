@@ -1,0 +1,16 @@
+ Django
+ psycopg2-binary
+ python-decouple
+ django-environ
+ moviepy
+ reportlab
+ faiss-cpu
+ requests
+ Pillow
+ gunicorn
+ whitenoise
+ django-crispy-forms
+ crispy-tailwind
+ django-extensions
+ google-generativeai
+youtube-transcript-api

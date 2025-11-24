@@ -1,0 +1,142 @@
+## Smart Video Annotation System (SVA_2) - Project Setup Guide (Easy Local Setup)
+Hey team, Ye hamare project "Smart Video Annotation System" ko apne-apne computer par setup karne ke steps hain. Please line-by-line follow karna.
+
+## 0. Pehle Ye Software Install Kar Lo:
+Sabse pehle, check kar lo ki tumhare system me ye 2 cheezein installed hain:
+
+Python (Version 3.10 ya usse naya): python.org se install kar lo. Important: Install karte time "Add Python to PATH" wala checkbox zaroor tick karna.
+
+VS Code (Code Editor): code.visualstudio.com se install kar lo.
+
+## Step 1: Project Folder aur Terminal
+Mera diya hua poora project folder (SVA_2) apne computer me kahin rakh lo (jaise D:\Projects\SVA_2).
+
+Apna Command Prompt (CMD) ya Terminal kholo.
+
+Ab terminal me, us project folder ke andar jao.
+
+Example: Agar project D:\Projects\SVA_2 me hai, to ye 2 command chalao:
+
+Bash
+
+D:
+cd D:\Projects\SVA_2
+Ab tumhara terminal D:\Projects\SVA_2> aisa dikhna chahiye.
+
+## Step 2: Virtual Environment (venv) aur Libraries
+Ab hum project ke liye ek "private room" (venv) banayenge aur zaroori libraries (requirements) install karenge.
+
+Private Room (venv) banao:
+
+Terminal me ye command chalao:
+
+Bash
+
+python -m venv venv
+(Ye SVA_2 folder ke andar venv naam ka ek naya folder bana dega).
+
+Room ko Activate karo:
+
+Ab ye command chalao:
+
+Bash
+
+.\venv\Scripts\activate
+(Terminal ke shuru me (venv) likha aa jayega. Iska matlab tum room ke andar ho).
+
+Saari Libraries Install karo:
+
+Ab ye command chalao:
+
+Bash
+
+pip install -r requirements.txt
+(Ye thoda time lega aur saari zaroori files install kar dega).
+
+Agar Error Aaye: Agar psycopg2 (PostgreSQL) ka error aaye, to requirements.txt file ko Notepad me kholna aur psycopg2-binary wali line ke shuru me # laga dena (comment kar dena) aur phir se pip install chalaana.
+
+## Step 3: .env File (Secret Settings)
+Project ko chalne ke liye kuch secret keys chahiye.
+
+Apne usi terminal me ((venv) activate hona chahiye), ye command chalao:
+
+Bash
+
+copy .env.example .env
+(Ye .env.example file ko copy karke .env naam ki ek nayi file bana dega).
+
+Ab VS Code me, SVA_2 folder kholo aur is nayi .env file ko edit karo:
+
+SECRET_KEY=: Iske aage kuch bhi random likh do (jaise SECRET_KEY=my-project-key-12345-xyz). Isko khaali mat chhodna.
+
+DATABASE_URL=: Isko khaali chhod do. Hum abhi SQLite (file wala database) use karenge.
+
+OPENAI_API_KEY=: Agar tumhare paas OpenAI ka key hai to daal do, warna ise bhi khaali chhod do (AI wale feature nahi chalenge).
+
+## Step 4: Database Banana (Migrations)
+Ab hum project ka database taiyaar karenge.
+
+Logs Folder banao: (Ye zaroori hai, warna error aayega)
+
+Terminal me ye command chalao:
+
+Bash
+
+mkdir logs
+Database ka Plan banao:
+
+Terminal me ye chalao:
+
+Bash
+
+python manage.py makemigrations
+Database me Tables banao:
+
+Terminal me ye chalao:
+
+Bash
+
+python manage.py migrate
+(Isse db.sqlite3 naam ki file ban jayegi. Yahi hamara database hai).
+
+Admin Account banao: (Admin panel me login ke liye)
+
+Terminal me ye chalao:
+
+Bash
+
+python manage.py createsuperuser
+(Ye tumse Username, Email aur Password poochega. Daal dena).
+
+## Step 5: Project Run Karna 🚀
+Sab set hai! Ab server run karo.
+
+Terminal me ye command chalao:
+
+Bash
+
+python manage.py runserver
+Apna Chrome/Edge browser kholo aur is address par jao: http://127.0.0.1:8000/
+
+Tumhari website chal jaani chahiye!
+
+## Common Problems (Agar Kuch Na Chale)
+Website Ajeeb Dikh Rahi Hai (CSS nahi hai):
+
+Browser me Hard Refresh karo: Ctrl + F5 (Windows) ya Cmd + Shift + R (Mac). 99% problem solve ho jayegi.
+
+Error: ModuleNotFoundError:
+
+Iska matlab pip install -r requirements.txt sahi se nahi chala. Check karo ki tumhara (venv) activate hai ya nahi.
+
+Wapas Project Run Karna Hai (Kal):
+
+Terminal kholo.
+
+cd D:\Projects\SVA_2 (Apne folder me jao).
+
+.\venv\Scripts\activate (Venv chalu karo).
+
+python manage.py runserver (Run karo).
+
+All the best! Koi error aaye to batana.
